@@ -1,3 +1,6 @@
+# Project stuff
+*.yaml
+
 # Logs
 *.log
 npm-debug.log*
