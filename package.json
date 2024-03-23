@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/LuanB-compt/upx7-tic-backend/issues"
   },
-  "homepage": "https://github.com/LuanB-compt/upx7-tic-backend#readme"
+  "homepage": "https://github.com/LuanB-compt/upx7-tic-backend#readme",
+  "dependencies": {
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3"
+  }
 }
