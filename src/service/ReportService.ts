@@ -8,7 +8,7 @@ export class ReportService implements Service {
     constructor(){};
 
     public async read(): Promise<any | undefined> {
-        throw new Error("not Implemented") ;
+        return await this.repository.read();
     }
 
     public async readByID(): Promise<any | undefined> {
