@@ -19,8 +19,12 @@ export class ReportRepository implements Repository {
         return response;
     };
 
-    public async readByID(): Promise<any | undefined> {
-        throw new Error("not Implemented") ;
+    public async readByID(id: number): Promise<Report | undefined> {
+        const response = await Report.findByPk(id);
+        if (response == undefined){
+            return undefined;
+        };
+        return response;
     };
 
     public async create(data: any): Promise<number | undefined> {

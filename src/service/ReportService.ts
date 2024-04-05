@@ -11,8 +11,8 @@ export class ReportService implements Service {
         return await this.repository.read();
     };
 
-    public async readByID(): Promise<any | undefined> {
-        throw new Error("not Implemented") ;
+    public async readByID(id: number): Promise<any | undefined> {
+        return await this.repository.readByID(id);
     };
 
     public async create(data: any): Promise<any | undefined> {

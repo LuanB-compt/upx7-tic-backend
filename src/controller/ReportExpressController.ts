@@ -15,6 +15,7 @@ export class ReportExpressController implements Controller {
 
     public init_routes() {
         this.router.get(this.path, this.get_read.bind(this));
+        this.router.get(this.path + '/:id', this.get_readByID.bind(this));
         this.router.post(this.path, this.post_create.bind(this));
         this.router.put(this.path + '/:id', this.put_update.bind(this));
         this.router.delete(this.path + '/:id', this.delete_delete.bind(this));
@@ -30,7 +31,12 @@ export class ReportExpressController implements Controller {
     };
 
     public async get_readByID(req: Request, res: Response){
-        throw new Error("not Implemented") ;
+        const response = await this.service.readByID(+req.params.id);
+        if (response != undefined) {
+            res.status(200).json(response);
+        }else {
+            res.status(400).json({message:"error"});
+        };
     };
 
     public async post_create(req: Request, res: Response){
