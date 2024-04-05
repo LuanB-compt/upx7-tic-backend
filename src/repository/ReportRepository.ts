@@ -12,7 +12,11 @@ export class ReportRepository implements Repository {
     }
 
     public async read(): Promise<any | undefined> {
-        throw new Error("not Implemented") ;
+        const response = await Report.findAll();
+        if (response == undefined){
+            return undefined;
+        };
+        return response;
     }
 
     public async readByID(): Promise<any | undefined> {
