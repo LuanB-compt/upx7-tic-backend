@@ -9,15 +9,15 @@ export class ReportService implements Service {
 
     public async read(): Promise<any | undefined> {
         return await this.repository.read();
-    }
+    };
 
     public async readByID(): Promise<any | undefined> {
         throw new Error("not Implemented") ;
     };
 
     public async create(data: any): Promise<any | undefined> {
-        throw new Error("not Implemented") ;
-    }
+        return await this.repository.create(data);
+    };
 
     public async update(): Promise<any | undefined> {
         throw new Error("not Implemented") ;

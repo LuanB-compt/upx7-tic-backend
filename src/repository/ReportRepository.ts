@@ -9,23 +9,27 @@ export class ReportRepository implements Repository {
 
     public async sync(){
         await Report.sync();
-    }
+    };
 
-    public async read(): Promise<any | undefined> {
+    public async read(): Promise<Report[] | undefined> {
         const response = await Report.findAll();
         if (response == undefined){
             return undefined;
         };
         return response;
-    }
+    };
 
     public async readByID(): Promise<any | undefined> {
         throw new Error("not Implemented") ;
     };
 
-    public async create(data: any): Promise<any | undefined> {
-        throw new Error("not Implemented") ;
-    }
+    public async create(data: any): Promise<Report | undefined> {
+        const response = await Report.create(data);
+        if (response == undefined){
+            return undefined;
+        };
+        return response;
+    };
 
     public async update(): Promise<any | undefined> {
         throw new Error("not Implemented") ;
