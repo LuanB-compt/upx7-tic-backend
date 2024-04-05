@@ -1,11 +1,12 @@
 import express from "express";
+import { Controller } from "./controller/Interface";
 
 class Application {
 
     private app: express.Application;
     private port: number;
 
-    constructor(controllers: any[], port: number = 3000){
+    constructor(controllers: Controller[], port: number = 3000){
         this.app = express();
         this.port = port;
         this.initializeMiddlewares();
@@ -16,9 +17,9 @@ class Application {
         this.app.use(express.json());
     }
 
-    private initializeControllers(controllers: any[]){
-        controllers.forEach((controller) => {
-            this.app.use('/', controller.router);
+    private initializeControllers(controllers: Controller[]){
+        controllers.forEach((controller: Controller) => {
+            this.app.use('/', controller.get_router());
         })
     }
 
