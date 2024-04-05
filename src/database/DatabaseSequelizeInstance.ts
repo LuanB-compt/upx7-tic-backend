@@ -1,8 +1,11 @@
 import { Sequelize } from "sequelize";
+import { Configer } from "../config/Configer";
 
 
 export function getDatabase(): Sequelize {
-    const db: Sequelize = new Sequelize('sqlite://./data/test.sqlite');
+    const config = new Configer('./src/config/database.yaml');
+    const url = config.get_yaml()['Database']['dev']['dialect']+'://'+config.get_yaml()['Database']['dev']['path'];
+    const db: Sequelize = new Sequelize(url);
     db.authenticate()
     .then(() => {
         console.log('Database connected!');
