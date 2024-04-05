@@ -23,15 +23,15 @@ export class ReportRepository implements Repository {
         throw new Error("not Implemented") ;
     };
 
-    public async create(data: any): Promise<Report | undefined> {
+    public async create(data: any): Promise<number | undefined> {
         const response = await Report.create(data);
         if (response == undefined){
             return undefined;
         };
-        return response;
+        return response.report_id;
     };
 
-    public async update(id: number, data: any): Promise<Report | undefined> {
+    public async update(id: number, data: any): Promise<number | undefined> {
         const obj = await Report.findByPk(id)
         if (obj == undefined){
             return undefined;
@@ -40,10 +40,10 @@ export class ReportRepository implements Repository {
         if (response == undefined){
             return undefined;
         };
-        return response;
+        return response.report_id;
     };
 
-    public async delete(id: number): Promise<any | undefined> {
+    public async delete(id: number): Promise<number | undefined> {
         const obj = await Report.findByPk(id)
         if (obj == undefined){
             return undefined;
@@ -52,7 +52,7 @@ export class ReportRepository implements Repository {
         if (response == undefined){
             return undefined;
         };
-        return response;
+        return obj.report_id;
     };
 
 };
