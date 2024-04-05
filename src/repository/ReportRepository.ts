@@ -31,8 +31,16 @@ export class ReportRepository implements Repository {
         return response;
     };
 
-    public async update(): Promise<any | undefined> {
-        throw new Error("not Implemented") ;
+    public async update(id: number, data: any): Promise<Report | undefined> {
+        const obj = await Report.findByPk(id)
+        if (obj == undefined){
+            return undefined;
+        };
+        const response = await obj.update(data);
+        if (response == undefined){
+            return undefined;
+        };
+        return response;
     };
 
     public async delete(): Promise<any | undefined> {
