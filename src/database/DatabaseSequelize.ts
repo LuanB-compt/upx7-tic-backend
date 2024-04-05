@@ -1,22 +1,20 @@
+import { Configer } from "../config/Configer";
 import { Database } from "./Interface";
 import { Sequelize } from "sequelize";
 
 export class DatabaseSequelize implements Database{
 
     private sequelize: Sequelize | undefined = undefined;
-    private path: string = '';
+    private readonly configer = new Configer('./src/config/database.yaml');
     private url: string = '';
-    private dialect: string = '';
-
+    
     constructor(path: string, dialect: string){
-        this.path = path,
-        this.dialect = dialect;
         this.create_url_connection();
         this.connect()
     }
 
     private create_url_connection() {
-        this.url = this.dialect + '://' + this.path;
+        this.url = this.configer.get_yaml()['Database']['dev']['dialect']+'://'+this.configer.get_yaml()['Database']['dev']['path'];
     }
 
     public async connect(): Promise<true | undefined> {
@@ -45,9 +43,6 @@ export class DatabaseSequelize implements Database{
         return this.sequelize;
     };
 
-    public get_dialect(): string {
-        return this.dialect;
-    };
 }
 
 //export const databaseSequelize = new DatabaseSequelize('../../data/test.sqlite', 'sqlite');
