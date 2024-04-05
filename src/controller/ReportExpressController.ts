@@ -5,17 +5,24 @@ import { ReportService } from "../service/ReportService";
 export class ReportExpressController implements Controller {
 
     private readonly service: ReportService = new ReportService();
-    public router = Router();
+    public router: Router;
+    public path: string = 'report';
 
     constructor(){
+        this.router = Router();
         this.init_routes();
     };
 
     public init_routes() {
-        throw new Error("not Implemented") ;
+        this.router.get(this.path, this.get_read.bind(this));
     }
     public async get_read(req: Request, res: Response){
-        throw new Error("not Implemented") ;
+        const response = await this.service.read();
+        if (response != undefined) {
+            res.status(200).json(response);
+        }else {
+            res.status(400).json({message:"error"});
+        };
     };
     public async get_readByID(req: Request, res: Response){
         throw new Error("not Implemented") ;
