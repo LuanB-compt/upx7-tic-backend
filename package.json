@@ -18,7 +18,12 @@
   },
   "homepage": "https://github.com/LuanB-compt/upx7-tic-backend#readme",
   "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.4",
+    "express": "^4.19.2",
     "nodemon": "^3.1.0",
+    "sequelize": "^6.37.2",
+    "tedious": "^18.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.3"
   }
