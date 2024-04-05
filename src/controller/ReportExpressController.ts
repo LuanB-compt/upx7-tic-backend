@@ -6,7 +6,7 @@ export class ReportExpressController implements Controller {
 
     private readonly service: ReportService = new ReportService();
     public router: Router;
-    public path: string = 'report';
+    public path: string = '/report';
 
     constructor(){
         this.router = Router();
@@ -15,7 +15,8 @@ export class ReportExpressController implements Controller {
 
     public init_routes() {
         this.router.get(this.path, this.get_read.bind(this));
-    }
+    };
+
     public async get_read(req: Request, res: Response){
         const response = await this.service.read();
         if (response != undefined) {
