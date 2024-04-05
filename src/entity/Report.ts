@@ -1,7 +1,5 @@
 import { Model, DataTypes, Sequelize, CreationOptional } from 'sequelize';
-import { DatabaseSequelize } from "../database/DatabaseSequelize";
-
-let database = new DatabaseSequelize('../../data/test.sqlite', 'sqlite');
+import { sequelize } from '../database/DatabaseSequelizeInstance';
 
 export class Report extends Model {
     declare report_id: number;
@@ -15,8 +13,6 @@ export class Report extends Model {
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
 }
-
-let sequelize: Sequelize = database.get_db();
 
 Report.init({
     report_id: {
