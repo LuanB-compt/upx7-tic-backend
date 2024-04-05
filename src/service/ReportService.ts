@@ -23,8 +23,8 @@ export class ReportService implements Service {
         return await this.repository.update(id, data);
     };
 
-    public async delete(): Promise<any | undefined> {
-        throw new Error("not Implemented") ;
+    public async delete(id: number): Promise<any | undefined> {
+        return await this.repository.delete(id);
     };
 
 };

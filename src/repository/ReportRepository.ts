@@ -43,8 +43,16 @@ export class ReportRepository implements Repository {
         return response;
     };
 
-    public async delete(): Promise<any | undefined> {
-        throw new Error("not Implemented") ;
+    public async delete(id: number): Promise<any | undefined> {
+        const obj = await Report.findByPk(id)
+        if (obj == undefined){
+            return undefined;
+        };
+        const response = await obj.destroy();
+        if (response == undefined){
+            return undefined;
+        };
+        return response;
     };
 
 };
