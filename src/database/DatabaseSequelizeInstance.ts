@@ -4,7 +4,7 @@ import { Configer } from "../config/Configer";
 
 export function getDatabase(): Sequelize {
     const config = new Configer('./src/config/database.yaml');
-    const url = config.get_yaml()['Database']['dev']['dialect']+'://'+config.get_yaml()['Database']['dev']['path'];
+    const url = config.get_config()['Database']['dev']['dialect']+'://'+config.get_config()['Database']['dev']['path'];
     const db: Sequelize = new Sequelize(url);
     db.authenticate()
     .then(() => {
