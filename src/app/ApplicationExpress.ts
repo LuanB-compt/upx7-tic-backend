@@ -1,5 +1,5 @@
 import express from "express";
-import { Controller } from "../controller/Interface";
+import { Controller } from "../controller/interface/Interface";
 
 export class ApplicationExpress {
 

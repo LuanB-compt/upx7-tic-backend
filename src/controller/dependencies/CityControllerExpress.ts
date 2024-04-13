@@ -1,8 +1,8 @@
 import { Router, Request, Response } from "express";
-import { Controller } from "./Interface";
-import { CityService } from "../service/CityService";
+import { Controller } from "../interface/Interface";
+import { CityService } from "../../service/CityService";
 
-export class CityExpressController implements Controller {
+export class CityControllerExpress implements Controller {
 
     private readonly service: CityService = new CityService();
     private router: Router;
