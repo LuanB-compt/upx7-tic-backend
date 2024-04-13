@@ -1,4 +1,5 @@
 import { Model, DataTypes, CreationOptional } from 'sequelize';
+import { Report } from './Report';
 import { sequelize } from '../database/DatabaseSequelizeInstance';
 
 export class City extends Model {
@@ -7,7 +8,7 @@ export class City extends Model {
 
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
-}
+};
 
 City.init({
     city_id: {
@@ -20,7 +21,7 @@ City.init({
         type: DataTypes.STRING(100),
         allowNull: false,
     },
-    
-}, {sequelize, tableName: 'City', modelName: 'City', timestamps: false})
+}, {sequelize, tableName: 'City', modelName: 'City', timestamps: false});
+Report.hasMany(City);
 
 sequelize.sync();
