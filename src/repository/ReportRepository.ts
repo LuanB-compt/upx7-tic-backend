@@ -7,7 +7,7 @@ export class ReportRepository implements Repository {
         this.sync();
     };
 
-    public async sync(){
+    private async sync(){
         await Report.sync();
     };
 

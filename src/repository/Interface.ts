@@ -1,5 +1,4 @@
 export interface Repository {
-    sync(): any ;
     read(): Promise <any[] | undefined>;
     readByID(id: number): Promise<any | undefined>;
     create(data: any): Promise <any | undefined>;
