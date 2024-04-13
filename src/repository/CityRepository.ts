@@ -1,26 +1,26 @@
 import { Repository } from "./Interface";
-import { Report } from "../entity/Report";
+import { City } from "../entity/City";
 
-export class ReportRepository implements Repository {
+export class CityRepository implements Repository {
 
     constructor(){
         this.sync();
     };
 
     private async sync(){
-        await Report.sync();
+        await City.sync();
     };
 
-    public async read(): Promise<Report[] | undefined> {
-        const response = await Report.findAll();
+    public async read(): Promise<City[] | undefined> {
+        const response = await City.findAll();
         if (response == undefined){
             return undefined;
         };
         return response;
     };
 
-    public async readByID(id: number): Promise<Report | undefined> {
-        const response = await Report.findByPk(id);
+    public async readByID(id: number): Promise<City | undefined> {
+        const response = await City.findByPk(id);
         if (response == undefined){
             return undefined;
         };
@@ -28,15 +28,15 @@ export class ReportRepository implements Repository {
     };
 
     public async create(data: any): Promise<number | undefined> {
-        const response = await Report.create(data);
+        const response = await City.create(data);
         if (response == undefined){
             return undefined;
         };
-        return response.report_id;
+        return response.city_id;
     };
 
     public async update(id: number, data: any): Promise<number | undefined> {
-        const obj = await Report.findByPk(id)
+        const obj = await City.findByPk(id)
         if (obj == undefined){
             return undefined;
         };
@@ -44,11 +44,11 @@ export class ReportRepository implements Repository {
         if (response == undefined){
             return undefined;
         };
-        return response.report_id;
+        return response.city_id;
     };
 
     public async delete(id: number): Promise<number | undefined> {
-        const obj = await Report.findByPk(id)
+        const obj = await City.findByPk(id)
         if (obj == undefined){
             return undefined;
         };
@@ -56,7 +56,7 @@ export class ReportRepository implements Repository {
         if (response == undefined){
             return undefined;
         };
-        return obj.report_id;
+        return obj.city_id;
     };
 
 };

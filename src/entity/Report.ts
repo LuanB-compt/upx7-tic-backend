@@ -1,4 +1,4 @@
-import { Model, DataTypes, Sequelize, CreationOptional } from 'sequelize';
+import { Model, DataTypes, CreationOptional } from 'sequelize';
 import { sequelize } from '../database/DatabaseSequelizeInstance';
 
 export class Report extends Model {
@@ -10,9 +10,11 @@ export class Report extends Model {
     declare photo_link: string;
     declare up_votes: number;
 
+    declare city_id: number;
+
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
-}
+};
 
 Report.init({
     report_id: {
@@ -44,7 +46,15 @@ Report.init({
     up_votes: {
         type: DataTypes.INTEGER,
         allowNull: true,
+    },
+    city_id: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'City',
+            key: 'city_id'
+        },
+        allowNull: false
     }
-}, {sequelize, tableName: 'Report', modelName: 'Report', timestamps: false})
+}, {sequelize, tableName: 'Report', modelName: 'Report', timestamps: false});
 
 sequelize.sync();
