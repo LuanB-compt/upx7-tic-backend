@@ -1,4 +1,4 @@
-import Application from "./src/Application";
+import Application from "./src/app/Application";
 import { ReportExpressController } from "./src/controller/ReportExpressController";
 import { CityExpressController } from "./src/controller/CityExpressController";
 
