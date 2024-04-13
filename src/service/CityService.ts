@@ -1,5 +1,5 @@
 import { CityRepository } from "../repository/CityRepository";
-import { Service } from "./Interface";
+import { Service } from "./interface/Interface";
 
 export class CityService implements Service {
 
