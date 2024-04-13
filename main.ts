@@ -1,6 +1,6 @@
-import Application from "./src/Application";
-import { ReportExpressController } from "./src/controller/ReportExpressController";
-import { CityExpressController } from "./src/controller/CityExpressController";
+import Application from "./src/app/Application";
+import { ReportController } from "./src/controller/ReportController";
+import { CityController } from "./src/controller/CityController";
 
-const app = new Application([new ReportExpressController(), new CityExpressController()], 3000);
+const app = new Application([new ReportController(), new CityController()], 3000);
 app.listen();

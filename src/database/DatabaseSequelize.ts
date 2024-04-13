@@ -14,7 +14,7 @@ export class DatabaseSequelize implements Database{
     }
 
     private create_url_connection() {
-        this.url = this.configer.get_yaml()['Database']['dev']['dialect']+'://'+this.configer.get_yaml()['Database']['dev']['path'];
+        this.url = this.configer.get_config()['Database']['dev']['dialect']+'://'+this.configer.get_config()['Database']['dev']['path'];
     }
 
     public async connect(): Promise<true | undefined> {
@@ -44,5 +44,3 @@ export class DatabaseSequelize implements Database{
     };
 
 }
-
-//export const databaseSequelize = new DatabaseSequelize('../../data/test.sqlite', 'sqlite');
