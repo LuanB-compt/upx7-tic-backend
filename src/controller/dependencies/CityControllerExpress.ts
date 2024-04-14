@@ -26,23 +26,28 @@ export class CityControllerExpress implements Controller {
     }
 
     public async get_read(req: Request, res: Response){
-        res.status(501);
+        res.status(501).json({message: "Can't acess the functionality"});
     };
 
     public async get_readByID(req: Request, res: Response){
-        res.status(501);
+        res.status(501).json({message: "Can't acess the functionality"});
     };
 
     public async post_create(req: Request, res: Response){
-        res.status(501);
+        const response = await this.service.create(req.body);
+        if(response == undefined) {
+            res.status(400).json({message:"Error"});
+        } else {
+            res.status(200).json(response);
+        };
     };
 
     public async put_update(req: Request, res: Response){
-        res.status(501);
+        res.status(501).json({message: "Can't acess the functionality"});
     };
 
     public async delete_delete(req: Request, res: Response){
-        res.status(501);
+        res.status(501).json({message: "Can't acess the functionality"});
     };
 
 };
