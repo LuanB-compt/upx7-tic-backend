@@ -6,7 +6,7 @@ export class Public_Servant extends Model {
     declare name: string;
     declare functional_identity: string;
     declare email: string;
-    declare passowrd: string;
+    declare password: string;
     declare phone: string;
 
     declare city_id: number;
@@ -36,8 +36,8 @@ Public_Servant.init({
         allowNull: false,
         unique: true
     },
-    passowrd: {
-        type: DataTypes.STRING(20),
+    password: {
+        type: DataTypes.STRING(100),
         allowNull: false,
         unique: true
     },

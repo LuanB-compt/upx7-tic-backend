@@ -32,10 +32,10 @@ export class ServantService implements Service {
 
     public async signup(data: any): Promise<number | undefined> {
         var response = await this.repository.readByFunctionalID(data.functional_identity);
-        if (response == undefined){
+        if (response != undefined){
             return undefined;
         };
-        data.passowrd = this.middleware.passwd_hash(data.passowrd);
+        data.password = await this.middleware.passwd_hash(data.password);
         return await this.repository.create(data);
     };
 
@@ -44,7 +44,7 @@ export class ServantService implements Service {
         if (response == undefined){
             return undefined;
         };
-        let check = await this.middleware.passwd_compare(passwd, response.passowrd);
+        let check = await this.middleware.passwd_compare(passwd, response.password);
         if(!check){
             return false;
         }

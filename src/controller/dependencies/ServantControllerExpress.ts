@@ -82,7 +82,7 @@ export class ServantControllerExpress implements Controller {
         if (response == undefined) {
             res.status(500).json({message:"Error"});
         } else if (response == false) {
-            res.status(500).json({message:"Error"});
+            res.status(501).json(response);
         } else {
             res.status(200).json(response);
         };

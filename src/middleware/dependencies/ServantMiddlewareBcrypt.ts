@@ -1,6 +1,4 @@
-import { Public_Servant } from "../../entity/Public_Servant";
 import bcrypt from "bcrypt";
-
 
 export class ServantMiddlewareBcrypt {
     private salt_or_rounds: number = 10;
@@ -13,5 +11,6 @@ export class ServantMiddlewareBcrypt {
 
     public async passwd_compare(to_check: string, to_compare: string): Promise<boolean> {
         return await bcrypt.compare(to_check, to_compare);
-    }
+    };
+
 };
