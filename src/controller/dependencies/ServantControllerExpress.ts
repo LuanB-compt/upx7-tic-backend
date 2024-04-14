@@ -30,19 +30,39 @@ export class ServantControllerExpress implements Controller {
     };
 
     public async get_readByID(req: Request, res: Response){
-        res.status(501);
+        const response = await this.service.readByID(+req.params.id);
+        if (response == undefined) {
+            res.status(400).json({message:"Error"});
+        } else {
+            res.status(200).json(response);
+        };
     };
 
     public async post_create(req: Request, res: Response){
-        res.status(501);
+        const response = await this.service.create(req.body);
+        if (response == undefined) {
+            res.status(400).json({message:"Error"});
+        } else {
+            res.status(200).json(response);
+        };
     };
 
     public async put_update(req: Request, res: Response){
-        res.status(501);
+        const response = await this.service.update(+req.params.id, req.body);
+        if (response == undefined) {
+            res.status(400).json({message:"Error"});
+        } else {
+            res.status(200).json(response);
+        };
     };
 
     public async delete_delete(req: Request, res: Response){
-        res.status(501);
+        const response = await this.service.delete(+req.params.id);
+        if (response == undefined) {
+            res.status(400).json({message:"Error"});
+        } else {
+            res.status(200).json(response);
+        };
     };
 
 };
