@@ -33,11 +33,13 @@ Public_Servant.init({
     },
     email: {
         type: DataTypes.STRING(100),
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     passowrd: {
-        type: DataTypes.STRING(200),
-        allowNull: false
+        type: DataTypes.STRING(20),
+        allowNull: false,
+        unique: true
     },
     phone: {
         type: DataTypes.STRING(15),

@@ -65,4 +65,25 @@ export class ServantControllerExpress implements Controller {
         };
     };
 
+    public async signup(req: Request, res: Response){
+        const response = await this.service.signup(req.body);
+        if (response == undefined) {
+            res.status(500).json({message:"Error"});
+        } else {
+            res.status(200).json(response);
+        };
+    };
+
+    public async signin(req: Request, res: Response){
+        const {functional_identity, password} = req.body;
+        const response = await this.service.signin(functional_identity, password);
+        if (response == undefined) {
+            res.status(500).json({message:"Error"});
+        } else if (response == false) {
+            res.status(500).json({message:"Error"});
+        } else {
+            res.status(200).json(response);
+        };
+    };
+
 };

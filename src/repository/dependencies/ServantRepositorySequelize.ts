@@ -27,6 +27,16 @@ export class ServantRepositorySequelize implements Repository {
         return response;
     };
 
+    public async readByFunctionalID(functional_identity: string): Promise<Public_Servant | undefined> {
+        const response = await Public_Servant.findOne({
+            where: {functional_identity: functional_identity}
+        });
+        if (response == undefined){
+            return undefined;
+        };
+        return response;
+    };
+
     public async create(data: any): Promise<number | undefined> {
         const response = await Public_Servant.create(data);
         if (response == undefined){
