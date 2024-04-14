@@ -1,4 +1,5 @@
 import { CityRepository } from "../repository/CityRepository";
+import { City } from "../entity/City";
 import { Service } from "./interface/Interface";
 
 export class CityService implements Service {
@@ -7,23 +8,23 @@ export class CityService implements Service {
 
     constructor(){};
 
-    public async read(): Promise<any | undefined> {
+    public async read(): Promise<City[] | undefined> {
         return await this.repository.read();
     };
 
-    public async readByID(id: number): Promise<any | undefined> {
+    public async readByID(id: number): Promise<City | undefined> {
         return await this.repository.readByID(id);
     };
 
-    public async create(data: any): Promise<any | undefined> {
+    public async create(data: any): Promise<number | undefined> {
         return await this.repository.create(data);
     };
 
-    public async update(id: number, data: any): Promise<any | undefined> {
+    public async update(id: number, data: any): Promise<number | undefined> {
         return await this.repository.update(id, data);
     };
 
-    public async delete(id: number): Promise<any | undefined> {
+    public async delete(id: number): Promise<number | undefined> {
         return await this.repository.delete(id);
     };
 
