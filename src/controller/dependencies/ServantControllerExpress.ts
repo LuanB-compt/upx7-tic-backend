@@ -19,6 +19,8 @@ export class ServantControllerExpress implements Controller {
         this.router.post(this.path, this.post_create.bind(this));
         this.router.put(this.path + '/:id', this.put_update.bind(this));
         this.router.delete(this.path + '/:id', this.delete_delete.bind(this));
+        this.router.post(this.path + '/signup', this.signup.bind(this));
+        this.router.post(this.path + '/signin', this.signin.bind(this));
     };
 
     public get_router() {
