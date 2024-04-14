@@ -6,6 +6,7 @@ import { sequelize } from '../database/DatabaseSequelizeInstance';
 export class City extends Model {
     declare city_id: number;
     declare name: string;
+    declare state: string;
 
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
@@ -19,9 +20,13 @@ City.init({
         allowNull: false
     }, 
     name: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(25),
         allowNull: false,
     },
+    state: {
+        type: DataTypes.STRING(2),
+        allowNull: false,
+    }
 }, {sequelize, tableName: 'City', modelName: 'City', timestamps: false});
 
 City.hasMany(Report);
