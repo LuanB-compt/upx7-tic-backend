@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { Controller } from "../interface/Interface";
+import { Controller } from "../../interface/controller/Interface";
 import { ServantService } from "../../service/ServantService";
 
 export class ServantControllerExpress implements Controller {
