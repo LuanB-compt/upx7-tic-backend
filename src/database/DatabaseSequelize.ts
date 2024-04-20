@@ -1,5 +1,5 @@
 import { Configer } from "../config/Configer";
-import { Database } from "./Interface";
+import { Database } from "../interface/database/Interface";
 import { Sequelize } from "sequelize";
 
 export class DatabaseSequelize implements Database{
