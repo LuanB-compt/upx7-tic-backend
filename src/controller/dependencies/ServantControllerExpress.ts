@@ -1,12 +1,10 @@
 import { Router, Request, Response } from "express";
 import { Controller } from "../interface/Interface";
 import { ServantService } from "../../service/ServantService";
-import { AuthMiddleware } from "../../middleware/AuthMiddleware";
 
 export class ServantControllerExpress implements Controller {
 
     private readonly service: ServantService = new ServantService();
-    private readonly middleware: AuthMiddleware = new AuthMiddleware();
     private router: Router;
     private path: string = '/servant';
 
@@ -16,11 +14,6 @@ export class ServantControllerExpress implements Controller {
     };
 
     private init_routes() {
-        this.router.get(this.path, this.middleware.verify_jwt.bind(this), this.get_read.bind(this));
-        this.router.get(this.path + '/:id', this.middleware.verify_jwt.bind(this), this.get_readByID.bind(this));
-        this.router.post(this.path, this.middleware.verify_jwt.bind(this), this.post_create.bind(this));
-        this.router.put(this.path + '/:id', this.middleware.verify_jwt.bind(this), this.put_update.bind(this));
-        this.router.delete(this.path + '/:id', this.middleware.verify_jwt.bind(this), this.delete_delete.bind(this));
         this.router.post(this.path + '/signup', this.signup.bind(this));
         this.router.post(this.path + '/signin', this.signin.bind(this));
     };
@@ -30,7 +23,7 @@ export class ServantControllerExpress implements Controller {
     }
 
     public async get_read(req: Request, res: Response){
-        res.status(501);
+        res.status(501).json({});
     };
 
     public async get_readByID(req: Request, res: Response){
