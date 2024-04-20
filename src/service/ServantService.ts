@@ -1,12 +1,14 @@
-import { ServantMiddleware } from "../middleware/ServantMiddleware";
 import { ServantRepository } from "../repository/ServantRepository";
+import { AuthService } from "./AuthService";
+import { AuthMiddleware } from "../middleware/AuthMiddleware";
 import { Public_Servant } from "../entity/Public_Servant";
 import { Service } from "./interface/Interface";
 
 export class ServantService implements Service {
 
-    private readonly middleware: ServantMiddleware = new ServantMiddleware();
+    private readonly middleware: AuthMiddleware = new AuthMiddleware();
     private readonly repository: ServantRepository = new ServantRepository();
+    private readonly auth: AuthService = new AuthService();
 
     constructor(){};
 
@@ -39,16 +41,20 @@ export class ServantService implements Service {
         return await this.repository.create(data);
     };
 
-    public async signin(functional_identity: string, passwd: string): Promise<boolean | undefined> {
+    public async signin(functional_identity: string, passwd: string): Promise<string | undefined> {
         let response = await this.repository.readByFunctionalID(functional_identity);
         if (response == undefined){
             return undefined;
         };
         let check = await this.middleware.passwd_compare(passwd, response.password);
-        if(!check){
-            return false;
-        }
-        return true;
+        if(check == false){
+            return undefined;
+        };
+        const auth_ = await this.auth.create(response.servant_id);
+        if(auth_ == undefined) {
+            return undefined;
+        };
+        return auth_;
     };
 
 };
