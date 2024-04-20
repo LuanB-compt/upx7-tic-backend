@@ -1,4 +1,3 @@
-import { Auth } from "../entity/Auth";
 import { AuthRepository } from "../repository/AuthRepository";
 import crypto from "crypto";
 
@@ -17,10 +16,10 @@ export class AuthService {
         var user_id = token.split('//')[-1];
         const response = await this.check(token);
         if (response == false){return false};
-        const result = await this.repository.readByUser(token, Number(user_id));
+        const result = await this.repository.readByUser(token, +user_id);
         if (result == undefined) {return false};
         return true;
-    }
+    };
 
     public async check(token: string): Promise<boolean> {
         const response = await this.repository.readByToken(token);
