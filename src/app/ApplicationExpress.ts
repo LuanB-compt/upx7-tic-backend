@@ -1,7 +1,8 @@
 import express from "express";
-import { Controller } from "../controller/interface/Interface";
+import { Controller } from "../interface/controller/Interface";
+import { AppInterface } from "../interface/app/Interface";
 
-export class ApplicationExpress {
+export class ApplicationExpress implements AppInterface {
 
     private app: express.Application;
     private port: number;
