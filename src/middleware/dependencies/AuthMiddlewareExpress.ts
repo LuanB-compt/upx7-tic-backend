@@ -1,13 +1,11 @@
 import bcrypt from "bcrypt";
 import { Request, Response, NextFunction } from "express";
 import { AuthService } from "../../service/AuthService";
-import { ServantService } from "../../service/ServantService";
 
 export class AuthMiddlewareExpress {
 
     private salt_or_rounds: number = 10;
     private readonly service: AuthService = new AuthService();
-    private readonly servant: ServantService = new ServantService();
 
     public async passwd_hash(password: string): Promise<string>{
         return await bcrypt.hash(password, this.salt_or_rounds);
@@ -29,4 +27,4 @@ export class AuthMiddlewareExpress {
         };
     };
 
-}
+};
