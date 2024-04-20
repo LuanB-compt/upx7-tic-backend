@@ -14,11 +14,8 @@ export class ServantControllerExpress implements Controller {
     };
 
     private init_routes() {
-        this.router.get(this.path, this.get_read.bind(this));
-        this.router.get(this.path + '/:id', this.get_readByID.bind(this));
-        this.router.post(this.path, this.post_create.bind(this));
-        this.router.put(this.path + '/:id', this.put_update.bind(this));
-        this.router.delete(this.path + '/:id', this.delete_delete.bind(this));
+        this.router.post(this.path + '/signup', this.signup.bind(this));
+        this.router.post(this.path + '/signin', this.signin.bind(this));
     };
 
     public get_router() {
@@ -26,7 +23,7 @@ export class ServantControllerExpress implements Controller {
     }
 
     public async get_read(req: Request, res: Response){
-        res.status(501);
+        res.status(501).json({});
     };
 
     public async get_readByID(req: Request, res: Response){
@@ -79,10 +76,8 @@ export class ServantControllerExpress implements Controller {
         const response = await this.service.signin(functional_identity, password);
         if (response == undefined) {
             res.status(500).json({message:"Error"});
-        } else if (response == false) {
-            res.status(500).json({message:"Error"});
         } else {
-            res.status(200).json(response);
+            res.status(200).json({JWT:response});
         };
     };
 

@@ -1,12 +1,14 @@
-import { ServantMiddleware } from "../middleware/ServantMiddleware";
 import { ServantRepository } from "../repository/ServantRepository";
+import { AuthService } from "./AuthService";
+import { AuthMiddleware } from "../middleware/AuthMiddleware";
 import { Public_Servant } from "../entity/Public_Servant";
 import { Service } from "./interface/Interface";
 
 export class ServantService implements Service {
 
-    private readonly middleware: ServantMiddleware = new ServantMiddleware();
+    private readonly middleware: AuthMiddleware = new AuthMiddleware();
     private readonly repository: ServantRepository = new ServantRepository();
+    private readonly auth: AuthService = new AuthService();
 
     constructor(){};
 
@@ -32,23 +34,27 @@ export class ServantService implements Service {
 
     public async signup(data: any): Promise<number | undefined> {
         var response = await this.repository.readByFunctionalID(data.functional_identity);
-        if (response == undefined){
+        if (response != undefined){
             return undefined;
         };
-        data.passowrd = this.middleware.passwd_hash(data.passowrd);
+        data.password = await this.middleware.passwd_hash(data.password);
         return await this.repository.create(data);
     };
 
-    public async signin(functional_identity: string, passwd: string): Promise<boolean | undefined> {
+    public async signin(functional_identity: string, passwd: string): Promise<string | undefined> {
         let response = await this.repository.readByFunctionalID(functional_identity);
         if (response == undefined){
             return undefined;
         };
-        let check = await this.middleware.passwd_compare(passwd, response.passowrd);
-        if(!check){
-            return false;
-        }
-        return true;
+        let check = await this.middleware.passwd_compare(passwd, response.password);
+        if(check == false){
+            return undefined;
+        };
+        const auth_ = await this.auth.create(response.servant_id);
+        if(auth_ == undefined) {
+            return undefined;
+        };
+        return auth_;
     };
 
 };
