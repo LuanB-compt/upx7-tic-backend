@@ -1,6 +1,6 @@
 import fs from 'fs';
 import YAML from 'yaml';
-import { ConfigerInterface } from '../interface/Interface';
+import { ConfigerInterface } from '../../interface/configer/Interface';
 
 export class ConfigerYAML implements ConfigerInterface {
     private yaml: any;
