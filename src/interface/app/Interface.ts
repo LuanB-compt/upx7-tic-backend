@@ -1,3 +1,3 @@
 export interface AppInterface {
-    listen();
+    listen(): any;
 }

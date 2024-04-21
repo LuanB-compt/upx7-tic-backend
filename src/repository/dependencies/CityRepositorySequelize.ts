@@ -1,4 +1,4 @@
-import { Repository } from "../interface/Interface";
+import { Repository } from "../../interface/repository/Interface";
 import { City } from "../../entity/City";
 
 export class CityRepositorySequelize implements Repository {
