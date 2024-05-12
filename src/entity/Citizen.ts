@@ -28,6 +28,7 @@ Citizen.init({
     },
     email: {
         type: DataTypes.STRING(100),
+        primaryKey: true,
         allowNull: false,
         unique: true
     },

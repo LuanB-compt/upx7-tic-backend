@@ -1,4 +1,4 @@
-import { Model, DataTypes, CreationOptional } from "sequelize";
+import { Model, DataTypes, CreationOptional, NOW } from "sequelize";
 import { sequelize } from "../database/DatabaseSequelizeInstance";
 
 export class Report extends Model {
@@ -11,7 +11,8 @@ export class Report extends Model {
   declare photo_link: string;
   declare up_votes: number;
 
-  declare city_id: number;
+  declare city_name: number;
+  declare citizen_email: string;
 
   declare createdAt: CreationOptional<Date>;
   declare updatedAt: CreationOptional<Date>;
@@ -31,6 +32,7 @@ Report.init(
     },
     report_date: {
       type: DataTypes.DATE,
+      defaultValue: NOW,
       allowNull: false,
     },
     status: {
@@ -53,14 +55,21 @@ Report.init(
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    city_id: {
+    city_name: {
       type: DataTypes.INTEGER,
       references: {
         model: "City",
-        key: "city_id",
+        key: "name",
       },
       allowNull: false,
     },
+    citizen_email: {
+      type: DataTypes.STRING(100),
+      references: {
+        model: "Citizen",
+        key: "email",
+      },
+    }
   },
   { sequelize, tableName: "Report", modelName: "Report", timestamps: false }
 );

@@ -21,7 +21,9 @@ City.init({
     }, 
     name: {
         type: DataTypes.STRING(25),
+        primaryKey: true,
         allowNull: false,
+        unique: true
     },
     state: {
         type: DataTypes.STRING(2),
