@@ -2,7 +2,7 @@ import { ServantRepository } from "../repository/ServantRepository";
 import { AuthService } from "./AuthService";
 import { AuthMiddleware } from "../middleware/AuthMiddleware";
 import { Public_Servant } from "../entity/Public_Servant";
-import { Service } from "./interface/Interface";
+import { Service } from "../interface/service/Interface";
 
 export class ServantService implements Service {
 

@@ -1,5 +1,5 @@
 import { ReportRepository } from "../repository/ReportRepository";
-import { Service } from "./interface/Interface";
+import { Service } from "../interface/service/Interface";
 
 export class ReportService implements Service {
 

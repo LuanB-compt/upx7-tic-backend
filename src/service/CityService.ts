@@ -1,6 +1,6 @@
 import { CityRepository } from "../repository/CityRepository";
 import { City } from "../entity/City";
-import { Service } from "./interface/Interface";
+import { Service } from "../interface/service/Interface";
 
 export class CityService implements Service {
 
