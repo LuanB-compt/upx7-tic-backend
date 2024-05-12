@@ -28,6 +28,23 @@ export class ReportRepositorySequelize implements Repository {
         return response;
     }
 
+    public async read_by_user(email: string, status: boolean | undefined = undefined): Promise<Report[] | undefined> {
+        var response: Report[];
+        if(status == undefined){
+            response = await Report.findAll({
+                where:{citizen_email: email}
+            });
+        } else {
+            response = await Report.findAll({
+                where:{citizen_email: email, status: status}
+            });
+        };
+        if (response==undefined){
+            return undefined;
+        };
+        return response;
+    }
+
     public async read(): Promise<Report[] | undefined> {
         const response = await Report.findAll();
         if (response == undefined){
