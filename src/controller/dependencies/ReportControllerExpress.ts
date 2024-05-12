@@ -14,15 +14,23 @@ export class ReportControllerExpress implements Controller {
     };
 
     private init_routes() {
-        this.router.get(this.path, this.get_read.bind(this));
         this.router.get(this.path + '/:id', this.get_readByID.bind(this));
+        this.router.get(this.path + '/close/:city', );
+    
         this.router.post(this.path, this.post_create.bind(this));
-        this.router.put(this.path + '/:id', this.put_update.bind(this));
-        this.router.delete(this.path + '/:id', this.delete_delete.bind(this));
     };
 
     public get_router() {
         return this.router;    
+    }
+
+    public async get_close_reports(req: Request, res: Response){
+        const response = await this.service.read_by_city(req.params.city, false);
+        if (response != undefined) {
+            res.status(200).json(response);
+        }else {
+            res.status(400).json({message:"error"});
+        };
     }
 
     public async get_read(req: Request, res: Response){
