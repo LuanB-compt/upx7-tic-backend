@@ -9,7 +9,11 @@ export class ReportService implements Service {
 
     public async read_by_city(city: string, status: boolean | undefined = undefined): Promise<any | undefined>{
         return await this.repository.read_by_city(city, status);
-    }
+    };
+
+    public async read_by_user(email: string, status: boolean | undefined = undefined): Promise<any | undefined>{
+        return await this.repository.read_by_user(email, status);
+    };
 
     public async read(): Promise<any | undefined> {
         return await this.repository.read();
