@@ -1,9 +1,13 @@
+import multer from "multer";
 import { Router, Request, Response } from "express";
 import { Controller } from "../../interface/controller/Interface";
+import { CDNMiddleware } from "../../middleware/CDNMiddleware";
 import { ReportService } from "../../service/ReportService";
 
 export class ReportControllerExpress implements Controller {
 
+    private readonly upload: multer.Multer = multer();
+    private readonly cdn: CDNMiddleware = new CDNMiddleware();
     private readonly service: ReportService = new ReportService();
     private router: Router;
     private path: string = '/report';
@@ -23,7 +27,7 @@ export class ReportControllerExpress implements Controller {
         this.router.get(this.path + '/close/:user', this.get_close_user.bind(this));
         this.router.get(this.path + '/open/:user', this.get_open_user.bind(this));
     
-        this.router.post(this.path, this.post_create.bind(this));
+        this.router.post(this.path, this.upload.single('file'), this.cdn.save_img.bind(this), this.post_create.bind(this));
     };
 
     public get_router() {
@@ -93,9 +97,8 @@ export class ReportControllerExpress implements Controller {
         };
     };
 
-
     public async post_create(req: Request, res: Response){
-        const response = await this.service.create(req.body);
+        const response = await this.service.create(res.locals.data);
         if (response != undefined) {
             res.status(200).json(response);
         }else {
