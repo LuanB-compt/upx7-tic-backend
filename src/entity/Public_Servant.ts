@@ -9,7 +9,7 @@ export class Public_Servant extends Model {
     declare password: string;
     declare phone: string;
 
-    declare city_name: number;
+    declare city_name: string;
 
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
@@ -46,7 +46,7 @@ Public_Servant.init({
         allowNull: false
     },
     city_name: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(25),
         references: {
             model: 'City',
             key: 'name'

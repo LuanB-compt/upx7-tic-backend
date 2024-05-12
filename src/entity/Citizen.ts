@@ -11,6 +11,8 @@ export class Citizen extends Model {
     declare zip_code: string;
     declare cpf: string;
 
+    declare city_name: string;
+
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
 };
@@ -53,6 +55,14 @@ Citizen.init({
         type: DataTypes.STRING(15),
         allowNull: false,
         unique: true
+    },
+    city_name: {
+        type: DataTypes.STRING(25),
+        references: {
+            model: 'City',
+            key: 'name'
+        },
+        allowNull: false
     },
 }, {sequelize, tableName: 'Citizen', modelName: 'Citizen', timestamps: false});
 
