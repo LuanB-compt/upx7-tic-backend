@@ -28,6 +28,7 @@ Public_Servant.init({
     },
     functional_identity: {
         type: DataTypes.STRING(20),
+        primaryKey: true,
         allowNull: false,
         unique: true
     },
