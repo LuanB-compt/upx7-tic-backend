@@ -12,21 +12,22 @@ export class ApplicationExpress implements AppInterface {
         this.port = port;
         this.initializeMiddlewares();
         this.initializeControllers(controllers);
-    }
+    };
 
     private initializeMiddlewares() {
         this.app.use(express.json());
-    }
+        this.app.use(express.urlencoded({extended:true}));
+    };
 
     private initializeControllers(controllers: Controller[]){
         controllers.forEach((controller: Controller) => {
             this.app.use('/', controller.get_router());
-        })
-    }
+        });
+    };
 
     public listen() {
         this.app.listen(this.port, () => {
             console.log("Running on port " + this.port);
-        })
-    }
-}
+        });
+    };
+};
