@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize";
 import { Configer } from "../config/Configer";
 
 export function getDatabase(): Sequelize {
-  const config = new Configer("src/config/database.yaml");
+  const config = new Configer("config/database.yaml");
   const url =
     config.get_config()["Database"]["dev"]["dialect"] +
     "://" +

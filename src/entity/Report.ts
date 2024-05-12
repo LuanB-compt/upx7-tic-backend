@@ -53,7 +53,8 @@ Report.init(
     },
     up_votes: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      defaultValue: 0,
+      allowNull: false,
     },
     city_name: {
       type: DataTypes.STRING(25),
@@ -69,6 +70,7 @@ Report.init(
         model: "Citizen",
         key: "email",
       },
+      allowNull: false,
     }
   },
   { sequelize, tableName: "Report", modelName: "Report", timestamps: false }
