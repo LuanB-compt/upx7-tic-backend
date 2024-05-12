@@ -19,6 +19,7 @@ export class ReportControllerExpress implements Controller {
         this.router.get(this.path + '/close/:city', this.get_close_city.bind(this));
         this.router.get(this.path + '/open/:city', this.get_open_city.bind(this));
 
+        this.router.get(this.path + '/:user', this.get_reports_user.bind(this));
         this.router.get(this.path + '/close/:user', this.get_close_user.bind(this));
         this.router.get(this.path + '/open/:user', this.get_open_user.bind(this));
     
@@ -58,6 +59,15 @@ export class ReportControllerExpress implements Controller {
 
     public async get_open_city(req: Request, res: Response){
         const response = await this.service.read_by_city(req.params.city, false);
+        if (response != undefined) {
+            res.status(200).json(response);
+        }else {
+            res.status(400).json({message:"error"});
+        };
+    };
+
+    public async get_reports_user(req: Request, res: Response){
+        const response = await this.service.read_by_user(req.params.user);
         if (response != undefined) {
             res.status(200).json(response);
         }else {
