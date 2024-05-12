@@ -7,6 +7,10 @@ export class ReportService implements Service {
 
     constructor(){};
 
+    public async read_by_city(city: string, status: boolean | undefined = undefined): Promise<any | undefined>{
+        return await this.repository.read_by_city(city, status);
+    }
+
     public async read(): Promise<any | undefined> {
         return await this.repository.read();
     };

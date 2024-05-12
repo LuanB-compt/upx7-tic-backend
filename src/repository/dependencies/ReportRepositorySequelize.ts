@@ -11,6 +11,23 @@ export class ReportRepositorySequelize implements Repository {
         await Report.sync();
     };
 
+    public async read_by_city(city: string, status: boolean | undefined = undefined): Promise<Report[] | undefined> {
+        var response: Report[];
+        if(status == undefined){
+            response = await Report.findAll({
+                where:{city_name: city}
+            });
+        } else {
+            response = await Report.findAll({
+                where:{city_name: city, status: status}
+            });
+        };
+        if (response==undefined){
+            return undefined;
+        };
+        return response;
+    }
+
     public async read(): Promise<Report[] | undefined> {
         const response = await Report.findAll();
         if (response == undefined){
