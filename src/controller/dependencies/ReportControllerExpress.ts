@@ -15,7 +15,8 @@ export class ReportControllerExpress implements Controller {
 
     private init_routes() {
         this.router.get(this.path + '/:id', this.get_readByID.bind(this));
-        this.router.get(this.path + '/close/:city', );
+        this.router.get(this.path + '/close/:city', this.get_close_reports.bind(this));
+        this.router.get(this.path + '/open/:city', this.get_open_reports.bind(this));
     
         this.router.post(this.path, this.post_create.bind(this));
     };
@@ -25,13 +26,22 @@ export class ReportControllerExpress implements Controller {
     }
 
     public async get_close_reports(req: Request, res: Response){
+        const response = await this.service.read_by_city(req.params.city, true);
+        if (response != undefined) {
+            res.status(200).json(response);
+        }else {
+            res.status(400).json({message:"error"});
+        };
+    };
+
+    public async get_open_reports(req: Request, res: Response){
         const response = await this.service.read_by_city(req.params.city, false);
         if (response != undefined) {
             res.status(200).json(response);
         }else {
             res.status(400).json({message:"error"});
         };
-    }
+    };
 
     public async get_read(req: Request, res: Response){
         const response = await this.service.read();
