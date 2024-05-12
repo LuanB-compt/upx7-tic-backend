@@ -11,7 +11,7 @@ export class Report extends Model {
   declare photo_link: string;
   declare up_votes: number;
 
-  declare city_name: number;
+  declare city_name: string;
   declare citizen_email: string;
 
   declare createdAt: CreationOptional<Date>;
@@ -56,7 +56,7 @@ Report.init(
       allowNull: true,
     },
     city_name: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(25),
       references: {
         model: "City",
         key: "name",
