@@ -2,7 +2,7 @@ import { CitizenRepository } from "../repository/CitizenRepository";
 import { AuthService } from "./AuthService";
 import { AuthMiddleware } from "../middleware/AuthMiddleware";
 import { Citizen } from "../entity/Citizen";
-import { Service } from "./interface/Interface";
+import { Service } from "../interface/service/Interface";
 
 export class CitizenService implements Service {
 
