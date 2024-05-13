@@ -41,7 +41,7 @@ export class ServantService implements Service {
         return await this.repository.create(data);
     };
 
-    public async signin(functional_identity: string, passwd: string): Promise<string | undefined> {
+    public async signin(functional_identity: string, passwd: string): Promise<object | undefined> {
         let response = await this.repository.readByFunctionalID(functional_identity);
         if (response == undefined){
             return undefined;
@@ -54,7 +54,15 @@ export class ServantService implements Service {
         if(auth_ == undefined) {
             return undefined;
         };
-        return auth_;
+        return {
+            "auth":auth_,
+            "id": response.servant_id,
+            "functional_identity": response.functional_identity,
+            "name": response.name,
+            "email": response.email,
+            "phone": response.phone,
+            "city_name": response.city_name
+        };
     };
 
 };

@@ -77,7 +77,7 @@ export class ServantControllerExpress implements Controller {
         if (response == undefined) {
             res.status(500).json({message:"Error"});
         } else {
-            res.status(200).json({JWT:response});
+            res.status(200).json(response);
         };
     };
 
