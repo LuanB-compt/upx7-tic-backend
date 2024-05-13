@@ -41,7 +41,7 @@ export class CitizenService implements Service {
         return await this.repository.create(data);
     };
 
-    public async signin(cpf: string, passwd: string): Promise<string | undefined> {
+    public async signin(cpf: string, passwd: string): Promise<object | undefined> {
         let response = await this.repository.readByCPF(cpf);
         if (response == undefined){
             return undefined;
@@ -54,6 +54,16 @@ export class CitizenService implements Service {
         if(auth_ == undefined) {
             return undefined;
         };
-        return auth_;
+        return {
+            "auth":auth_,
+            "id": response.citizen_id,
+            "email": response.email,
+            "name": response.name,
+            "phone": response.phone,
+            "address": response.address,
+            "zip_code": response.zip_code,
+            "cpf": response.cpf,
+            "city_name": response.city_name
+        };
     };
 };
