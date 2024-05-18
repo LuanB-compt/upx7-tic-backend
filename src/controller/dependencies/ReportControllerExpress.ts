@@ -28,6 +28,8 @@ export class ReportControllerExpress implements Controller {
         this.router.get(this.path + '/open/:user', this.get_open_user.bind(this));
     
         this.router.post(this.path, this.upload.single('file'), this.cdn.save_img.bind(this), this.post_create.bind(this));
+
+        this.router.put(this.path + '/:id', this.put_update.bind(this));
     };
 
     public get_router() {
