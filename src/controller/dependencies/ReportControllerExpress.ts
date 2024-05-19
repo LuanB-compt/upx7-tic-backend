@@ -46,6 +46,7 @@ export class ReportControllerExpress implements Controller {
     );
 
     this.router.put(this.path + "/:id", this.put_update.bind(this));
+    this.router.put(this.path + "/upvote/:id", this.put_upvotes.bind(this));
   }
 
   public get_router() {
@@ -131,6 +132,15 @@ export class ReportControllerExpress implements Controller {
     } else {
       res.status(400).json({ message: "error" });
     }
+  }
+
+  public async put_upvotes(req: Request, res: Response){
+    const response = await this.service.upvotes(+req.params.id);
+    if (response != undefined) {
+      res.status(200).json(response);
+    } else {
+      res.status(400).json({ message: "error" });
+    };
   }
 
   public async delete_delete(req: Request, res: Response) {
