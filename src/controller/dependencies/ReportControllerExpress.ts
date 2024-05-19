@@ -19,12 +19,24 @@ export class ReportControllerExpress implements Controller {
   private init_routes() {
     this.router.get(this.path, this.get_read.bind(this));
     this.router.get(this.path + "/:id", this.get_readByID.bind(this));
-    this.router.get(this.path + "/close/:city", this.get_close_city.bind(this));
-    this.router.get(this.path + "/open/:city", this.get_open_city.bind(this));
+    this.router.get(
+      this.path + "/city/close/:city",
+      this.get_close_city.bind(this)
+    );
+    this.router.get(
+      this.path + "/city/open/:city",
+      this.get_open_city.bind(this)
+    );
 
     this.router.get(this.path + "/:user", this.get_reports_user.bind(this));
-    this.router.get(this.path + "/close/:user", this.get_close_user.bind(this));
-    this.router.get(this.path + "/open/:user", this.get_open_user.bind(this));
+    this.router.get(
+      this.path + "/user/close/:user",
+      this.get_close_user.bind(this)
+    );
+    this.router.get(
+      this.path + "/user/open/:user",
+      this.get_open_user.bind(this)
+    );
 
     this.router.post(
       this.path,
