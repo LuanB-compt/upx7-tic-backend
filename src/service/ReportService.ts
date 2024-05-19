@@ -31,6 +31,16 @@ export class ReportService implements Service {
         return await this.repository.update(id, data);
     };
 
+    public async upvotes(id: number): Promise<any | undefined> {
+        const report = await this.repository.readByID(id);
+        if (report == undefined){
+            return undefined;
+        };
+        let upvote = report.up_votes;
+        upvote = upvote + 1;
+        return await this.update(id, {"up_votes": upvote});
+    };
+
     public async delete(id: number): Promise<any | undefined> {
         return await this.repository.delete(id);
     };
