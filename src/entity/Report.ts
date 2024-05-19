@@ -10,6 +10,7 @@ export class Report extends Model {
   declare location: string;
   declare photo_link: string;
   declare up_votes: number;
+  declare response: string;
 
   declare city_name: string;
   declare citizen_email: string;
@@ -55,6 +56,10 @@ Report.init(
       type: DataTypes.INTEGER,
       defaultValue: 0,
       allowNull: false,
+    },
+    response: {
+      type: DataTypes.STRING(500),
+      allowNull: true
     },
     city_name: {
       type: DataTypes.STRING(25),
