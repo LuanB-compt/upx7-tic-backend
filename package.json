@@ -1,0 +1,37 @@
+{
+  "name": "reporte_ja",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "api": "npx ts-node main.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuanB-compt/upx7-tic-backend.git"
+  },
+  "author": "Luan Bruno, Nathan Roberto, Caio Lucas, Gabriel Pereira",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/LuanB-compt/upx7-tic-backend/issues"
+  },
+  "homepage": "https://github.com/LuanB-compt/upx7-tic-backend#readme",
+  "dependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^4.17.21",
+    "@types/multer": "^1.4.11",
+    "@types/node": "^20.12.4",
+    "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.0",
+    "sequelize": "^6.37.2",
+    "sqlite3": "^5.1.7",
+    "tedious": "^18.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3",
+    "yaml": "^2.4.1"
+  }
+}
