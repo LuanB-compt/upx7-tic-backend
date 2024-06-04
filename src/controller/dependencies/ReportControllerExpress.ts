@@ -1,8 +1,10 @@
+import axios from "axios";
 import { Request, Response, Router } from "express";
 import multer from "multer";
 import { Controller } from "../../interface/controller/Interface";
 import { CDNMiddleware } from "../../middleware/CDNMiddleware";
 import { ReportService } from "../../service/ReportService";
+import { error } from "console";
 
 export class ReportControllerExpress implements Controller {
   private readonly upload: multer.Multer = multer();
@@ -37,6 +39,8 @@ export class ReportControllerExpress implements Controller {
       this.path + "/user/open/:user",
       this.get_open_user.bind(this)
     );
+
+    this.router.get(this.path + "/img/:id", this.render_cdn_img.bind(this));
 
     this.router.post(
       this.path,
@@ -116,6 +120,24 @@ export class ReportControllerExpress implements Controller {
     }
   }
 
+  public async render_cdn_img(req: Request, res: Response) {
+    try {
+      const idParts = req.params.id.split("/");
+      const id = idParts[idParts.length - 1];
+
+      const response = await axios({
+        url: `http://127.0.0.1:5000/${id}`,
+        method: "get",
+        responseType: "stream",
+      });
+
+      res.setHeader("Content-Type", response.headers["content-type"]);
+      response.data.pipe(res);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  }
+
   public async post_create(req: Request, res: Response) {
     const response = await this.service.create(res.locals.data);
     if (response != undefined) {
@@ -134,13 +156,13 @@ export class ReportControllerExpress implements Controller {
     }
   }
 
-  public async put_upvotes(req: Request, res: Response){
+  public async put_upvotes(req: Request, res: Response) {
     const response = await this.service.upvotes(+req.params.id);
     if (response != undefined) {
       res.status(200).json(response);
     } else {
       res.status(400).json({ message: "error" });
-    };
+    }
   }
 
   public async delete_delete(req: Request, res: Response) {
