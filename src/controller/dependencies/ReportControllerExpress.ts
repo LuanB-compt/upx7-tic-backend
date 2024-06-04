@@ -1,10 +1,10 @@
 import axios from "axios";
 import { Request, Response, Router } from "express";
 import multer from "multer";
+import { Readable } from "stream";
 import { Controller } from "../../interface/controller/Interface";
 import { CDNMiddleware } from "../../middleware/CDNMiddleware";
 import { ReportService } from "../../service/ReportService";
-import { error } from "console";
 
 export class ReportControllerExpress implements Controller {
   private readonly upload: multer.Multer = multer();
@@ -120,6 +120,15 @@ export class ReportControllerExpress implements Controller {
     }
   }
 
+  private streamToBase64 = async (stream: Readable): Promise<string> => {
+    const chunks: Uint8Array[] = [];
+    for await (const chunk of stream) {
+      chunks.push(chunk);
+    }
+    const buffer = Buffer.concat(chunks);
+    return buffer.toString("base64");
+  };
+
   public async render_cdn_img(req: Request, res: Response) {
     try {
       const idParts = req.params.id.split("/");
@@ -131,8 +140,10 @@ export class ReportControllerExpress implements Controller {
         responseType: "stream",
       });
 
-      res.setHeader("Content-Type", response.headers["content-type"]);
-      response.data.pipe(res);
+      const base64Image = await this.streamToBase64(response.data);
+      res.send(
+        `data:${response.headers["content-type"]};base64,${base64Image}`
+      );
     } catch (error) {
       res.status(500).send(error);
     }
